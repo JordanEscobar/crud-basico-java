@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import ejemplo.crud.basico.modelo.Persona;
+
 public class mainPersona {
 	public static void main(String[] args) {
-		ArrayList<String> lista = new ArrayList<String>();
+		ArrayList<Persona> lista = new ArrayList<Persona>();
 		
 		System.out.println("Bienvenido");
 		Scanner sc = new Scanner(System.in);
 		int opcion =0;
 		int contador = 0;
 		String nombreModificar = "";
-		
 		
 		do {
 			System.out.println("SELECCIONE UNA OPCIÓN");	
@@ -28,14 +29,19 @@ public class mainPersona {
 			case 1: {					
 					System.out.println("Ingrese el nombre de la persona");
 					String nombrePersona = sc.next();
-					lista.add(nombrePersona);
-					System.out.println("El nombre de la Persona es : "+ nombrePersona);
+					System.out.println("Ingrese la edad de la persona");
+					int edad = sc.nextInt();
+					Persona p = new Persona();
+					p.setNombre(nombrePersona);
+					p.setEdad(edad);
+					lista.add(p);
+					System.out.println("El nombre de la Persona es : "+ p.getNombre());
 					break;
 					}
 			case 2: {			
 					System.out.println("Modificar Persona");
 					
-					Iterator<String> it = lista.iterator();
+					Iterator<Persona> it = lista.iterator();
 					while(it.hasNext())
 					  System.out.println(it.next());
 									
@@ -44,9 +50,12 @@ public class mainPersona {
 					System.out.println("Ingrese el nuevo nombre ");
 					String nuevoNombre = sc.next();	
 					
-					lista.set(posicion,nuevoNombre);
+					Persona p = new Persona();
+					p.setNombre(nuevoNombre);
+					
+					lista.set(posicion, p);
 
-					System.out.println("listado de Personas "+ lista.toString());
+					System.out.println("listado de Personas "+ p.getNombre());
 					break;
 			}
 			case 3: {			
@@ -59,7 +68,9 @@ public class mainPersona {
 			}
 			case 4: {			
 					System.out.println("LISTADO DE PERSONAS");
-					System.out.println( "NOMBRE: " +  lista.toString().toUpperCase() + " ");					
+					for (int i = 0; i < lista.size(); i++) {
+						System.out.println( "NOMBRE: " +  lista.get(i).getNombre() + " ");	
+					}									
 					break;
 			}
 			case 5:
